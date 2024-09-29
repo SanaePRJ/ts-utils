@@ -4,6 +4,20 @@
 
 このリポジトリではGitHubでの開発の練習も行っています。
 
+
+## 貢献方法
+他の開発者がプロジェクトに貢献する方法を説明します。
+
+### 貢献
+1. リポジトリをフォークします。
+2. 新しいブランチを作成します (`git checkout -b feature/新機能`).
+3. 変更をコミットします (`git commit -m 'Add some 新機能'`).
+4. ブランチにプッシュします (`git push origin feature/新機能`).
+5. プルリクエストを作成します。
+
+> [!CAUTION]
+> コードをコミットする前に、必ず`eslint`と`prettier`を実行してください。
+
 ## CodeStyle
 
 ts-utilsに`eslint`と`prettier`を導入します。
@@ -13,11 +27,6 @@ ts-utilsに`eslint`と`prettier`を導入します。
 1. [ESLint と Prettier の導入 - zenn.dev](https://zenn.dev/takaya39/articles/0a8a9fae99001f)
 2. [フロントエンドやるなら入れておくべきESlintってなに？ - qiita](https://qiita.com/mzmz__02/items/63f2624e00c02be2f942)
 3. [コードフォーマッター「Prettier」を初心者にも分かりやすく解説 - qiita](https://qiita.com/Junpei_Takagi/items/3983cc735e71ea3917fd)
-
-
-> [!CAUTION]
-> コードをコミットする前に、必ず`eslint`と`prettier`を実行してください。
-
 
 ### Node.jsのインストール
 
