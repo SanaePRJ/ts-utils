@@ -1,6 +1,6 @@
 # ts-utils
 
-**_ts-utils_**は`TypeScript`で書かれたライブラリであり、Webサイト開発をサポートします。
+**ts-utils**は`TypeScript`で書かれたライブラリであり、Webサイト開発をサポートします。
 
 このリポジトリではGitHubでの開発の練習も行っています。
 
@@ -14,8 +14,10 @@ ts-utilsに`eslint`と`prettier`を導入します。
 2. [フロントエンドやるなら入れておくべきESlintってなに？ - qiita](https://qiita.com/mzmz__02/items/63f2624e00c02be2f942)
 3. [コードフォーマッター「Prettier」を初心者にも分かりやすく解説 - qiita](https://qiita.com/Junpei_Takagi/items/3983cc735e71ea3917fd)
 
-[!IMPORTANT]
-コードをコミットする前に、必ず`eslint`と`prettier`を実行してください。
+
+> [!CAUTION]
+> コードをコミットする前に、必ず`eslint`と`prettier`を実行してください。
+
 
 ### Node.jsのインストール
 
@@ -23,8 +25,8 @@ ts-utilsに`eslint`と`prettier`を導入します。
 
 4. [Linux 環境に Node.js インストール - qiita](https://qiita.com/nanbuwks/items/ed8adb2d4324c939a349)
 
-[!CAUTION]
-このプロジェクトを使用/開発するためには`Node.js`をインストールしていなければなりません。
+> [!NOTE]
+> このプロジェクトを使用/開発するためには`Node.js`をインストールしていなければなりません。
 
 #### Windows
 
