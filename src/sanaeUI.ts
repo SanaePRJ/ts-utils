@@ -74,3 +74,33 @@ export async function delayPrint(
     }
   }, interval);
 }
+
+// スクロール時に要素の表示を切り替えるメソッド
+// -----------------------------
+// const showElement = (entry: IntersectionObserverEntry) => {
+//      entry.target.style.opacity = '1';
+// };
+// const hideElement = (entry: IntersectionObserverEntry) => {
+//      entry.target.style.opacity = '0';
+// };
+//
+// const elements = document.querySelectorAll('.toggle-visibility');
+// toggleVisibilityOnScroll(Array.from(elements), showElement, hideElement);
+export function toggleVisibilityOnScroll(
+  elements: HTMLElement[],
+  visibleStyle: (entry: IntersectionObserverEntry) => void,
+  invisibleStyle: (entry: IntersectionObserverEntry) => void,
+) {
+  // オブザーバ
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      // 描画されている
+      if (entry.isIntersecting) visibleStyle(entry);
+      // 描画されていない
+      else invisibleStyle(entry);
+    });
+  });
+
+  // すべての要素に対して
+  elements.forEach((element) => obs.observe(element));
+}
