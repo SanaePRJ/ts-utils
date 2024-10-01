@@ -104,3 +104,31 @@ export function toggleVisibilityOnScroll(
   // すべての要素に対して
   elements.forEach((element) => obs.observe(element));
 }
+
+// 指定した要素で選択されたファイルを読み取るメソッド
+export async function readSelectedFileContent(
+  element: HTMLInputElement,
+): Promise<string | ArrayBuffer | null> {
+  // 要素の type は 'file' でなければならない。
+  if (element.type !== 'file') throw new Error('element type must file');
+
+  // ファイルを取得
+  const file = element.files![0];
+
+  // 選択されていない
+  if (!file) throw new Error('not selected file');
+
+  return new Promise((resolve, reject) => {
+    // filereader 作成
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      resolve(event.target!.result);
+    };
+    reader.onerror = (error) => {
+      reject(error);
+    };
+
+    reader.readAsText(file);
+  });
+}

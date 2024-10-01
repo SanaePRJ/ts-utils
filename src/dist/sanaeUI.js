@@ -3,8 +3,6 @@
     このライブラリは SanaeProject の webサイト で使用される共通ライブラリです。
     
     DelayPrint       : ゆっくりとタイピングするように表記できます。
-    ReadFileBySelect : Select されたファイルの内容を取得します。
-    ReadFile         : 他のファイルを取得します。
 
     Copyright 2024 SanaeProject.
 -------------------------------------------------------------------------------------------------- */
@@ -43,6 +41,8 @@ var __awaiter =
   };
 Object.defineProperty(exports, '__esModule', { value: true });
 exports.delayPrint = delayPrint;
+exports.toggleVisibilityOnScroll = toggleVisibilityOnScroll;
+exports.readSelectedFileContent = readSelectedFileContent;
 // 書き込み中のエレメント
 let writingElements = [];
 // ゆっくりと表示するメソッド
@@ -95,7 +95,7 @@ function delayPrint(element_1, text_1, interval_1) {
       // 上書き
       else writeContent = text;
       // 書き込みを行う
-      let printInterval = setInterval(() => {
+      const printInterval = setInterval(() => {
         if (writeCount < writeContent.length) {
           // 文字を少しずつ表示させていく。
           element.textContent = writeContent.substring(0, writeCount) + '_';
@@ -114,5 +114,51 @@ function delayPrint(element_1, text_1, interval_1) {
       }, interval);
     },
   );
+}
+// スクロール時に要素の表示を切り替えるメソッド
+// -----------------------------
+// const showElement = (entry: IntersectionObserverEntry) => {
+//      entry.target.style.opacity = '1';
+// };
+// const hideElement = (entry: IntersectionObserverEntry) => {
+//      entry.target.style.opacity = '0';
+// };
+//
+// const elements = document.querySelectorAll('.toggle-visibility');
+// toggleVisibilityOnScroll(Array.from(elements), showElement, hideElement);
+function toggleVisibilityOnScroll(elements, visibleStyle, invisibleStyle) {
+  // オブザーバ
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      // 描画されている
+      if (entry.isIntersecting) visibleStyle(entry);
+      // 描画されていない
+      else invisibleStyle(entry);
+    });
+  });
+  // すべての要素に対して
+  elements.forEach((element) => obs.observe(element));
+}
+// 指定した要素で選択されたファイルを読み取るメソッド
+function readSelectedFileContent(element) {
+  return __awaiter(this, void 0, void 0, function* () {
+    // 要素の type は 'file' でなければならない。
+    if (element.type !== 'file') throw new Error('element type must file');
+    // ファイルを取得
+    const file = element.files[0];
+    // 選択されていない
+    if (!file) throw new Error('not selected file');
+    return new Promise((resolve, reject) => {
+      // filereader 作成
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        resolve(event.target.result);
+      };
+      reader.onerror = (error) => {
+        reject(error);
+      };
+      reader.readAsText(file);
+    });
+  });
 }
 //# sourceMappingURL=sanaeUI.js.map
