@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SanaeProject Library Usage Example</title>
+    <style>
+        .toggle-visibility {
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+    </style>
+    <script type="module">
+        import { delayPrint, toggleVisibilityOnScroll, readSelectedFileContent } from './dist/sanaeUI.js';
+
+        // delayPrintの使用例
+        document.addEventListener('DOMContentLoaded', () => {
+            const element = document.getElementById('helloWorld');
+            delayPrint(element, 'Hello, World!', 500);
+        });
+
+        // toggleVisibilityOnScrollの使用例
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.toggle-visibility');
+            toggleVisibilityOnScroll(Array.from(elements), (entry) => {
+                entry.target.style.opacity = '1';
+            }, (entry) => {
+                entry.target.style.opacity = '0';
+            });
+        });
+
+        // readSelectedFileContentの使用例
+        document.addEventListener('DOMContentLoaded', () => {
+            const fileInput = document.getElementById('fileInput');
+            const viewCont  = document.getElementById('viewCont');
+
+            fileInput.addEventListener('change', async () => {
+                try {
+                    const content = await readSelectedFileContent(fileInput);
+
+                    viewCont.textContent  += 'File content:' + content;
+                } catch (error) {
+                    viewCont.textContent  +='Error reading file:' + error;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>ts-utils Library Usage Example</h1>
+
+    <!-- delayPrintのデモ -->
+    <p id="helloWorld">hello</p>
+
+    <!-- toggleVisibilityOnScrollのデモ -->
+    <div class="toggle-visibility" style="height: 100vh; background-color: lightblue;">
+        Scroll down to see me fade in and out!
+    </div>
+    <div style="height: 100vh;"></div>
+    <div class="toggle-visibility" style="height: 100vh; background-color: lightcoral;">
+        Here I am!
+    </div>
+
+    <!-- readSelectedFileContentのデモ -->
+    <input type="file" id="fileInput">
+    <div id="viewCont"></div>
+</body>
+</html>

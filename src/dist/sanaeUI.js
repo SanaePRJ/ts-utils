@@ -1,4 +1,3 @@
-'use strict';
 /* --------------------------------------------------------------------------------------------------
     このライブラリは SanaeProject の webサイト で使用される共通ライブラリです。
     
@@ -39,10 +38,6 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-Object.defineProperty(exports, '__esModule', { value: true });
-exports.delayPrint = delayPrint;
-exports.toggleVisibilityOnScroll = toggleVisibilityOnScroll;
-exports.readSelectedFileContent = readSelectedFileContent;
 // 書き込み中のエレメント
 let writingElements = [];
 // ゆっくりと表示するメソッド
@@ -53,7 +48,7 @@ let writingElements = [];
 // let element = document.getElementById('helloWorld');
 // 上書き: delayPrint(element,'helloWorld',500);      // -> helloWorld
 // 追記  : delayPrint(element,'helloWorld',500,true); // -> hellohelloWorld
-function delayPrint(element_1, text_1, interval_1) {
+export function delayPrint(element_1, text_1, interval_1) {
   return __awaiter(
     this,
     arguments,
@@ -126,7 +121,11 @@ function delayPrint(element_1, text_1, interval_1) {
 //
 // const elements = document.querySelectorAll('.toggle-visibility');
 // toggleVisibilityOnScroll(Array.from(elements), showElement, hideElement);
-function toggleVisibilityOnScroll(elements, visibleStyle, invisibleStyle) {
+export function toggleVisibilityOnScroll(
+  elements,
+  visibleStyle,
+  invisibleStyle,
+) {
   // オブザーバ
   const obs = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -140,7 +139,7 @@ function toggleVisibilityOnScroll(elements, visibleStyle, invisibleStyle) {
   elements.forEach((element) => obs.observe(element));
 }
 // 指定した要素で選択されたファイルを読み取るメソッド
-function readSelectedFileContent(element) {
+export function readSelectedFileContent(element) {
   return __awaiter(this, void 0, void 0, function* () {
     // 要素の type は 'file' でなければならない。
     if (element.type !== 'file') throw new Error('element type must file');
