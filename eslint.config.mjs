@@ -1,17 +1,24 @@
 import globals from 'globals';
-import pluginJs from '@eslint/js';
+
 import tseslint from 'typescript-eslint';
+//import tseslintPlugin from '@typescript-eslint/eslint-plugin';
+import tseslintParser from '@typescript-eslint/parser';
+
 import prettierConfig from 'eslint-config-prettier';
 
 export default [
-  { files: ['**/*.{js,mjs,cjs,ts}'] },
-  { languageOptions: { globals: globals.browser } },
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
-  prettierConfig,
   {
+    files: ['**/*.ts', '**/*.tsx'], // TypeScriptファイルのみを対象
+    languageOptions: {
+      globals: globals.browser,
+      parser: tseslintParser,
+    },
+    plugins: {
+      '@typescript-eslint': tseslint,
+    },
     rules: {
-      // ここにカスタムルールを追加
+      // TypeScript用のカスタムルールを追加
     },
   },
+  prettierConfig,
 ];
